@@ -1,31 +1,33 @@
 class EmpWageComputation
 {
- 	public static final int WAGE_PER_HR=20,PART_TIME=1,FULL_DAY=2;
-    	public static void main(String args[])
-	{
-        	int random=(int)Math.floor(Math.random()*10)%3;
-         	int workingHr=0,salary=0;
-          	switch (random) 
-	 	{
-            	case FULL_DAY :
+    public static final int WAGE_PER_HR=20,PART_TIME=1,FULL_DAY=2,MONTH=20;
+    public static void main(String[] args)
+    {
+        int salary=0,workingHr=0,day=0;
+        int totalWorkingHrs=0,totalSalary=0;
+        while(day<=MONTH)
+        {
+            int random = (int) Math.floor(Math.random() * 10) % 3;
+            switch (random) 
+		{
+                	case FULL_DAY:
 			{
-                		System.out.println("EMPLOYEE PRESENT FOR FULL DAY");
-                		workingHr=8;
-                		break;
+                    		workingHr = 8;
+                    		break;
 			}
-            	case PART_TIME :
+                	case PART_TIME:
 			{
-                		System.out.println("EMPLOYEE PRESENT FOR HALF DAY");
-                		workingHr=4;
-                		break;
+                    		workingHr = 4;
+                    		break;
 			}
-            	default :
-			{
-                		System.out.println("EMPLOYEE IS ABSENT");
-                		break;
-        		}
-        		salary=WAGE_PER_HR*workingHr;
-        		System.out.println("EMPLOYEE WAGE : "+salary);
-    		}
-	}
+                	default:
+                    	break;
+            	}
+            	salary=WAGE_PER_HR*workingHr;
+            	totalWorkingHrs+=workingHr;
+            	totalSalary+=salary;
+            	day++;
+        }
+        System.out.println("EMPLOYEE WAGE : " + totalSalary);
+    }
 }
