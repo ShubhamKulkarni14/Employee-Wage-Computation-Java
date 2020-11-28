@@ -1,43 +1,52 @@
+import java.util.Scanner;
+
 class EmpWageComputation
 {
-    public static final int WAGE_PER_HR=20,PART_TIME=1,FULL_DAY=2,MONTH=20,MAX_HRS=100;
-    public static void main(String args[])
-    {
-        int salary=0,workingHr=0,day=0;
-        int totalWorkingHrs=0,totalSalary=0;
-        while(day<=MONTH && totalWorkingHrs<MAX_HRS)
+                public static final int FULL_TIME=1;
+                public static final int PART_TIME=0;
+
+        public static void calculateEmpWage(String CompanyName,int wagePerHr,int NumberOfWorkingDays,int NumberWorkingHrs)
         {
-            int random = (int) Math.floor(Math.random() * 10) % 3;
-            switch (random) 
-		{
-                	case FULL_DAY:
-            		{
-				workingHr = 8;
-                   	 	break;
-			}
-                	case PART_TIME:
-			{
-                    		workingHr = 4;
-                    		break;
-        		}
-			default:
-                    	break;
-            	}
-            	if(totalWorkingHrs==96 || totalWorkingHrs == 98)
-            	{
-                	if (workingHr==8)
-                    	break;
-            	}
-            	else if(totalWorkingHrs==98)
-            	{
-                	break;
-            	}
-            	salary=WAGE_PER_HR*workingHr;
-            	totalWorkingHrs+=workingHr;
-            	totalSalary+=salary;
-            	day++;
+                        int currentWorkingHour=0;
+                        int currentWorkingday=0;
+                        int salary,workingHr=0;
+                        int totalSalary=0;
+
+                        while( NumberOfWorkingDays>=currentWorkingday && NumberWorkingHrs>=currentWorkingHour )
+                        {
+                                int random=(int)Math.floor(Math.random()*10)%3;
+                                switch(random)
+                                {
+                                        case FULL_TIME:
+					{
+                                                workingHr=8;
+                                                break;
+					}
+                                        case PART_TIME:
+					{
+                                                workingHr=4;
+                                                break;
+					}
+                                        default:
+                                                workingHr=0;
+                                 }
+                                        currentWorkingday++;
+                                        salary=workingHr*wagePerHr;
+                                        totalSalary+=salary;
+                        }
+                                        System.out.println("Total computed salary of "+CompanyName+" is "+totalSalary);
         }
-        System.out.println("EMPLOYEE WAGE : " + totalSalary);
-        System.out.println("Days "+day+" Hours "+totalWorkingHrs);
-    }
+}
+
+public class EmployeeWage extends WageCalculation
+{
+                                public static void main(String[] args)
+                                {
+                                        System.out.println("\nEnter Company Name : ");
+                                        Scanner sc=new Scanner(System.in);
+                                        String CompanyName=sc.nextLine();
+                                        System.out.println("Enter Number of Working Days : ");
+                                        int NumberOfWorkingDays=sc.nextInt();
+                                        calculateEmpWage(CompanyName,NumberOfWorkingDays,20,30);
+                                }
 }
