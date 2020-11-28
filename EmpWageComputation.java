@@ -40,7 +40,7 @@ class EmpWageComputation
 
 public class EmployeeWage extends WageCalculation
 {
-                                public static void main(String[] args)
+                                public static void main(String args[])
                                 {
                                         System.out.println("\nEnter Company Name : ");
                                         Scanner sc=new Scanner(System.in);
