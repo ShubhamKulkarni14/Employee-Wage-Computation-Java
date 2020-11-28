@@ -1,58 +1,72 @@
-import java.util.Scanner;
+import java.util.Random;
 
 class EmpWageComputation
 {
-                public static final int FULL_TIME=1;
-                public static final int PART_TIME=0;
 
-        public static void calculateEmpWage(String CompanyName,int wagePerHr,int NumberOfWorkingDays,int NumberWorkingHrs)
-        {
-                        int currentWorkingHour=0;
-                        int currentWorkingday=0;
-                        int salary,workingHr=0;
-                        int totalSalary=0;
+	public static final int IS_PART_TIME=1;
+	public static final int IS_FULL_TIME=2;
 
-                        while( NumberOfWorkingDays>=currentWorkingday && NumberWorkingHrs>=currentWorkingHour )
-                        {
-                                int random=(int)Math.floor(Math.random()*10)%3;
-                                switch(random)
-                                {
-                                        case FULL_TIME:
-                                        {
-						workingHr=8;
-                                                break;
-					}
-                                        case PART_TIME:
-					{
-                                                workingHr=4;
-                                                break;
-					}
-                                        default:
-                                                workingHr=0;
-                                 }
-                                        currentWorkingday++;
-                                        salary=workingHr*wagePerHr;
-                                        totalSalary+=salary;
-                        }
-                                        System.out.println("Total computed salary of "+CompanyName+" is "+totalSalary);
-        }
+	private final String company;
+	private final int empRatePerHour;
+	private final int numOfWorkingDays;
+	private final int maxHoursPerMonth;
+
+	private int totalEmpWage;
+
+	public EmpWageBuilderObject(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+		super();
+		this.company = company;
+		this.empRatePerHour = empRatePerHour;
+		this.numOfWorkingDays = numOfWorkingDays;
+		this.maxHoursPerMonth = maxHoursPerMonth;
 }
 
-public class EmployeeWage extends WageCalculation
+public void computeEmpWage()
 {
-                                public static void main(String args[])
-                                {
-                                        System.out.println("\nHow many Companies you want to check ?");
-                                        Scanner scn = new Scanner(System.in);
-                                        int temp = scn.nextInt();
-                                        for(int i=1;i<=temp;i++)
-                                        {
-                                        Scanner sc=new Scanner(System.in);
-                                        System.out.println("\nEnter Company Name : ");
-                                        String CompanyName=sc.nextLine();
-                                        System.out.println("Enter Number of Working Days : ");
-                                        int NumberOfWorkingDays=sc.nextInt();
-                                        calculateEmpWage(CompanyName,NumberOfWorkingDays,20,30);
-                                        }
-                                }
+	int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
+	Random random=new Random();
+	while(totalEmpHrs<=maxHoursPerMonth && totalWorkingDays<numOfWorkingDays)
+	{
+		totalWorkingDays++;
+
+		int empCheck=random.nextInt(3);
+		switch(empCheck)
+		{
+			case IS_PART_TIME:
+			{
+				empHrs=4;
+				break;
+			}
+			case IS_FULL_TIME:
+			{
+				empHrs=8;
+				break;
+			}
+			default:
+				empHrs=0;
+		}
+		totalEmpHrs+=empHrs;
+		System.out.println("day: "+totalWorkingDays + "EmpHrs: "+empHrs);
+	}
+	 totalEmpWage=totalEmpHrs*empRatePerHour;
+}
+
+public String toString()
+	{
+		return "Total Emp Wage for Company: "+company+" is "+totalEmpWage;
+	}
+	public static void main(String args[])
+	{
+		EmpWageBuilderObject dMart=new EmpWageBuilderObject("DMart", 20, 2, 10);
+		EmpWageBuilderObject reliance=new EmpWageBuilderObject("Reliance", 10, 4, 20);
+
+		dMart.computeEmpWage();
+		System.out.println(dMart);
+
+
+		reliance.computeEmpWage();
+		System.out.println(reliance);
+
+	}
+
 }
