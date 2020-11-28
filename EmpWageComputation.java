@@ -18,8 +18,8 @@ class EmpWageComputation
                                 switch(random)
                                 {
                                         case FULL_TIME:
-					{
-                                                workingHr=8;
+                                        {
+						workingHr=8;
                                                 break;
 					}
                                         case PART_TIME:
@@ -42,11 +42,17 @@ public class EmployeeWage extends WageCalculation
 {
                                 public static void main(String args[])
                                 {
-                                        System.out.println("\nEnter Company Name : ");
+                                        System.out.println("\nHow many Companies you want to check ?");
+                                        Scanner scn = new Scanner(System.in);
+                                        int temp = scn.nextInt();
+                                        for(int i=1;i<=temp;i++)
+                                        {
                                         Scanner sc=new Scanner(System.in);
+                                        System.out.println("\nEnter Company Name : ");
                                         String CompanyName=sc.nextLine();
                                         System.out.println("Enter Number of Working Days : ");
                                         int NumberOfWorkingDays=sc.nextInt();
                                         calculateEmpWage(CompanyName,NumberOfWorkingDays,20,30);
+                                        }
                                 }
 }
