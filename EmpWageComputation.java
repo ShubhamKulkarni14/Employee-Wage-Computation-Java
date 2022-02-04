@@ -1,5 +1,8 @@
 import java.util.Random;
 
+
+
+
 class EmpWageComputation
 {
 
